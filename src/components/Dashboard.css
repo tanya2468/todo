@@ -4,6 +4,7 @@
     justify-content: center;
     align-items: left;
     padding: 20px;
+    width: 95%;
     background-color: #fff; /* Background color of the header */
 }
 
@@ -40,6 +41,7 @@
 .dashboard-create-task {
     display: flex;
     justify-content: flex-end;
+    
 }
 
 .dashboard-create-task .create-task-button {

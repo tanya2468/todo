@@ -1,12 +1,21 @@
-import React from "react";
-import TaskColumn from "./TaskColumn";
+import React from 'react';
+import TaskCard from './TaskCard';
 
-const TaskBoard = ({ tasks }) => {
+const TaskBoard = ({ tasks, updateTaskStatus }) => {
   return (
     <div className="task-board">
-      <TaskColumn title="TODO" tasks={tasks.todo} />
-      <TaskColumn title="IN PROGRESS" tasks={tasks.inProgress} />
-      <TaskColumn title="COMPLETED" tasks={tasks.completed} />
+      {Object.keys(tasks).map(status => (
+        <div key={status} className="task-column">
+          <h2>{status.charAt(0).toUpperCase() + status.slice(1)}</h2>
+          {tasks[status].map(task => (
+            <TaskCard
+              key={task.id}
+              task={task}
+              updateTaskStatus={updateTaskStatus} // Ensure this is passed
+            />
+          ))}
+        </div>
+      ))}
     </div>
   );
 };

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./TaskModal.css"; // Import modal-specific CSS
 
-const TaskModal = ({ onClose, onCreate }) => {
+const TaskModal = ({ task, onClose, onCreate, onSave }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [date, setDate] = useState("");
@@ -12,6 +12,34 @@ const TaskModal = ({ onClose, onCreate }) => {
   const formatDate = (inputDate) => {
     const dateParts = inputDate.split("-");
     return `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // dd/mm/yyyy
+  };
+
+  // Populate form fields if editing an existing task
+  useEffect(() => {
+    if (task) {
+      setTitle(task.title);
+      setDescription(task.description);
+      setDate(task.date.split("/").reverse().join("-")); // Convert dd/mm/yyyy to yyyy-mm-dd
+      setStatus(task.status);
+      setPriority(task.priority);
+    }
+  }, [task]);
+
+  const handleSave = () => {
+    if (title && date && status && priority) {
+      const updatedTask = {
+        ...task,
+        title,
+        description,
+        date: formatDate(date), // Convert date to dd/mm/yyyy format
+        status,
+        priority
+      };
+      onSave(updatedTask);
+      onClose(); // Close the modal after saving the task
+    } else {
+      alert("Please fill out all required fields!");
+    }
   };
 
   const handleCreate = () => {
@@ -35,7 +63,7 @@ const TaskModal = ({ onClose, onCreate }) => {
     <div className="modal-overlay">
       <div className="modal">
         <header>
-          <h2>Create New Task</h2>
+          <h2>{task ? "Edit Task" : "Create New Task"}</h2>
           <button className="close-button" onClick={onClose}>×</button>
         </header>
         <div className="modal-content">
@@ -79,7 +107,7 @@ const TaskModal = ({ onClose, onCreate }) => {
               required
             >
               <option value="" disabled>Select here</option>
-              <option value="todo">Todo</option>
+              <option value="todo">To Do</option>
               <option value="inProgress">In Progress</option>
               <option value="completed">Completed</option>
             </select>
@@ -103,7 +131,12 @@ const TaskModal = ({ onClose, onCreate }) => {
 
         <footer>
           <button className="cancel-button" onClick={onClose}>Cancel</button>
-          <button className="create-button" onClick={handleCreate}>Create</button>
+          <button 
+            className="save-button" 
+            onClick={task ? handleSave : handleCreate}
+          >
+            {task ? "Save" : "Create"}
+          </button>
         </footer>
       </div>
     </div>

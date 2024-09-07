@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import "./App.css";
 import TaskBoard from "./TaskBoard";
 import TaskModal from "./TaskModal";
-import Dashboard from "./components/Dashboard"; // Import the Dashboard component (Header with Logo and Create Task)
+import Dashboard from "./components/Dashboard";
+import EditTaskModal from "./EditTaskModal"; // Import the new edit modal component
+import DeleteTaskModal from "./DeleteTaskModal"; // Import the new delete modal component
 
 const initialTasks = {
   todo: [
@@ -47,7 +49,9 @@ const initialTasks = {
 
 function App() {
   const [tasks, setTasks] = useState(initialTasks);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // Function to handle adding a new task
   const addTask = (newTask) => {
@@ -74,19 +78,63 @@ function App() {
     setTasks(updatedTasks);
   };
 
+  const deleteTask = (taskId) => {
+    const updatedTasks = { ...tasks };
+    Object.keys(updatedTasks).forEach((status) => {
+      updatedTasks[status] = updatedTasks[status].filter((task) => task.id !== taskId);
+    });
+    setTasks(updatedTasks);
+  };
+
+  const saveTask = (editedTask) => {
+    const updatedTasks = { ...tasks };
+    updatedTasks[editedTask.status] = updatedTasks[editedTask.status].map(task =>
+      task.id === editedTask.id ? editedTask : task
+    );
+    setTasks(updatedTasks);
+  };
+
   return (
     <div className="app">
+      
       {/* Dashboard component contains the logo, title, and create task button */}
-      <Dashboard onCreateTask={() => setIsModalOpen(true)} />
+      <Dashboard onCreateTask={() => setIsCreateModalOpen(true)} />
 
       {/* TaskBoard displays the tasks */}
-      <TaskBoard tasks={tasks} updateTaskStatus={updateTaskStatus} />
+      <TaskBoard 
+        tasks={tasks} 
+        updateTaskStatus={updateTaskStatus} 
+      />
 
-      {/* Conditional rendering of the TaskModal */}
-      {isModalOpen && (
+      {/* Buttons to trigger the edit and delete modals */}
+      <div className="task-actions">
+        <button onClick={() => setIsEditModalOpen(true)}>Edit Task</button>
+        <button onClick={() => setIsDeleteModalOpen(true)}>Delete Task</button>
+      </div>
+
+      {/* Modal for creating new tasks */}
+      {isCreateModalOpen && (
         <TaskModal 
-          onClose={() => setIsModalOpen(false)} 
+          onClose={() => setIsCreateModalOpen(false)} 
           onCreate={addTask} 
+        />
+      )}
+
+      {/* Modal for editing tasks */}
+      {isEditModalOpen && (
+        <EditTaskModal
+          tasks={tasks}
+          onClose={() => setIsEditModalOpen(false)}
+          onSave={saveTask}
+        />
+      )}
+
+      {/* Modal for deleting tasks */}
+      {isDeleteModalOpen && (
+        <DeleteTaskModal
+          tasks={tasks}
+          onClose={() => setIsDeleteModalOpen(false)}
+          onDelete={deleteTask}
         />
       )}
     </div>
