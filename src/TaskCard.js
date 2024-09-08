@@ -1,17 +1,25 @@
 import React, { useState } from "react";
-import "./TaskCard.css"; // Assuming you have the CSS file linked
+import "./TaskCard.css";
 
 const TaskCard = ({ task, updateTaskStatus }) => {
   const { id, title, description, priority, date } = task;
   const [showDropdown, setShowDropdown] = useState(false);
 
   const handleStatusChange = (newStatus) => {
-    setShowDropdown(false); // Hide dropdown after selecting an option
-    updateTaskStatus(id, newStatus); // Update the task status
+    setShowDropdown(false);
+    updateTaskStatus(id, newStatus);
+  };
+
+  const handleDragStart = (e) => {
+    e.dataTransfer.setData("taskId", id); // Store task ID in the dataTransfer object
   };
 
   return (
-    <div className={`task-card ${priority.toLowerCase()}`}>
+    <div
+      className={`task-card ${priority.toLowerCase()}`}
+      draggable
+      onDragStart={handleDragStart} // Add drag event
+    >
       <div className="task-header">
         <span className={`priority ${priority.toLowerCase()}`}>{priority}</span>
         <h3>{title}</h3>
