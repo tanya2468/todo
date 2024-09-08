@@ -1,0 +1,60 @@
+.dashboard-header {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    padding: 20px;
+    width: 95%;
+    background-color: #fff; /* Background color of the header */
+}
+
+.dashboard-logo img {
+    height: 80px; /* Adjust the height of the logo */
+    padding: 16px;
+    margin-bottom: 20px;
+    max-width: 150px;
+    align-items:left;
+    box-shadow: 0 0 10px rgb(248, 242, 242);
+}
+
+.dashboard-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    width: 100%; /* Ensures it takes the full width */
+    padding: 0 20px; /* Adds padding for spacing */
+}
+
+.dashboard-title {
+    flex: 1;
+    text-align: left;
+    box-shadow: 0 0 10px rgb(248, 242, 242);
+    padding: 20px;
+    width:80px;
+    /* Removed margin-bottom to keep everything in the same row */
+}
+
+.dashboard-title h1 {
+    font-size: 24px;
+    height: 24px;
+    margin: 0;
+}
+
+.dashboard-create-task {
+    display: flex;
+    justify-content: flex-end;
+    
+}
+
+.dashboard-create-task .create-task-button {
+    background-color: #8c4ce7;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.dashboard-create-task .create-task-button:hover {
+    background-color: #863ce6;
+}

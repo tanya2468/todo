@@ -1,0 +1,127 @@
+/* General Styling */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #eef1f5;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.title {
+  font-size: 2rem;
+  color: #333;
+}
+
+.create-task-button {
+  background-color: #6c5ce7;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Task Board */
+.task-board {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px 0;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.task-column {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  width: 30%;
+}
+
+.task-column h2 {
+  text-align: center;
+  color: white;
+  padding: 10px 0;
+  border-radius: 8px;
+}
+
+.todo h2 {
+  background-color: #6c5ce7;
+}
+
+.in-progress h2 {
+  background-color: #fbc531;
+}
+
+.completed h2 {
+  background-color: #4cd137;
+}
+
+/* Task Header */
+.task-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Align vertically centered */
+  margin-bottom: 10px;
+}
+
+.task-header h3 {
+  flex-grow: 1; /* Take up remaining space */
+  margin: 0;
+  padding-right: 10px; /* Add space between the heading and dropdown */
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #333;
+  padding: 0 5px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  top: 100%;
+  right: 0;
+  z-index: 100;
+  width: 120px;
+}
+
+.dropdown-menu li {
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}

@@ -1,0 +1,77 @@
+.task-board {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  /* Style for the Todo section */
+.todo-section {
+    background-color: #7E22CE; /* Purple color */
+    color: white;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Style for the In Progress section */
+.inProgress-section {
+    background-color: #F59E0B; /* Orange color */
+    color: white;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Style for the Completed section */
+.completed-section {
+    background-color: #10B981; /* Green color */
+    color: white;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+    font-weight: bold;
+}
+
+/* Task Card styles */
+.task-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Task Header styles */
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.priority-high {
+    background-color: #F97316; /* High Priority color - Orange */
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+
+.priority-medium {
+    background-color: #F59E0B; /* Medium Priority color */
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+
+.priority-low {
+    background-color: #A7F3D0; /* Low Priority color - Light Green */
+    color: black;
+    padding: 3px 8px;
+    border-radius: 5px;
+}
+
+
+  
