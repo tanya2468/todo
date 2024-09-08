@@ -214,12 +214,14 @@ header .title {
   right: 0;
   z-index: 100;
   width: 120px;
+  
 }
 
 .dropdown-menu li {
   padding: 5px;
   cursor: pointer;
   text-align: left;
+  
 }
 
 .dropdown-menu li:hover {

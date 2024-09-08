@@ -1,0 +1,50 @@
+.task-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .high {
+    border-left: 4px solid red;
+    padding: 10px;
+  }
+  
+  .medium {
+    border-left: 4px solid orange;
+    padding: 10px;
+  }
+  
+  .low {
+    border-left: 4px solid green;
+    padding: 10px;
+  }
+
+
+  
+  .task-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .high {
+    border-left: 4px solid #8a30e5;
+    padding: 10px;
+    margin: 20px;
+  }
+  
+  .medium {
+    border-left: 4px solid #ffc14e;
+    padding: 10px;
+    margin: 20px;
+  }
+  
+  .low {
+    border-left: 4px solid #06c270;
+    padding: 10px;
+    margin: 20px;
+  }

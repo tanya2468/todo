@@ -1,15 +1,13 @@
 /* General Styling */
 body {
-  font-family: "Arial", sans-serif;
-  background-color: #f9fcfe;
+  font-family: 'Arial', sans-serif;
+  background-color: #eef1f5;
   color: #333;
   margin: 0;
   padding: 0;
 }
 
-h1,
-h2,
-h3 {
+h1, h2, h3 {
   color: #333;
 }
 
@@ -26,7 +24,7 @@ button {
 }
 
 button:hover {
-  background-color: #7d8ce2;
+  background-color: #2c3d9b;
 }
 
 /* Header */
@@ -65,9 +63,9 @@ header .title {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  background-color: #f9fcfe;
-  /* padding: 20px; */
+  width: 99%;
+  background-color: #eef1f5;
+  padding: 20px;
 }
 
 /* Task Board */
@@ -79,14 +77,10 @@ header .title {
   margin-top: 20px;
 }
 
-.task-actions {
-  margin-top: 3rem;
-}
-
 /* Task Column */
 .task-column {
   background-color: white;
-  /* padding: 20px; */
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
   width: 30%;
@@ -97,31 +91,16 @@ header .title {
 
 .task-column:hover {
   transform: translateY(-5px);
+
 }
 
 .task-column h2 {
   text-align: center;
   font-size: 1.5rem;
   color: black;
-  background-color: rgb(21, 203, 94);
-  /* border-radius: 10px; */
-  margin-bottom: 0;
+  background-color:rgb(21, 203, 94);
+  border-radius: 10px;
   padding: 20px;
-  margin-top: 0;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  &.purple {
-    background-color: #8a30e5;
-    color: white;
-  }
-  &.yellow {
-    background-color: #ffc14e;
-    color: black;
-  }
-  &.green {
-    background-color: #06c270;
-    color: white;
-  }
 }
 
 /* Task Card */
@@ -133,16 +112,20 @@ header .title {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
   position: relative;
+ 
 }
 
 .task-card:hover {
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  
 }
 
 .task-card h3 {
   font-size: 1.2rem;
   margin-top: 10px;
-  padding: 10px;
+  padding:10px;
+
+
 }
 
 .task-card p {
@@ -155,6 +138,7 @@ header .title {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 /* Task Footer */
@@ -174,18 +158,18 @@ header .title {
 }
 
 .priority.high {
-  background-color: #ad98c3;
-  /* color: white; */
+  background-color: #f7a39d;
+  color: white;
 }
 
 .priority.medium {
-  background-color: #fce3b0;
-  /* color: white; */
+  background-color: #f18b8b;
+  color: white;
 }
 
 .priority.low {
   background-color: #c2dea2;
-  /* color: white; */
+  color: white;
 }
 
 /* Dropdown */
@@ -196,7 +180,7 @@ header .title {
 
 .dropdown-toggle {
   background: none;
-
+  
   cursor: pointer;
   color: #333;
 }

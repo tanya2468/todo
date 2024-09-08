@@ -9,17 +9,17 @@
 .high {
   border-left: 4px solid #8a30e5;
   padding: 10px;
-  margin: 10px;
+  margin: `0px;
 }
 
 .medium {
   border-left: 4px solid #ffc14e;
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
 }
 
 .low {
   border-left: 4px solid #06c270;
   padding: 10px;
-  margin: 10px;
+  margin: 20px;
 }
