@@ -6,7 +6,8 @@
   }
   
   .dashboard-logo img {
-    height: 90px;
+    height: 90px; /* Adjust the height of the logo */
+  
     max-width: 150px;
     align-items: left;
     box-shadow: 0 0 10px rgb(248, 242, 242);
@@ -18,7 +19,7 @@
     justify-content: space-between;
     align-items: left;
     width: 100%; 
-    padding: 0 20px 0 0;
+    padding: 0 20px 0 0; /* Adds padding for spacing */
     background-color: white;
     border-radius: 10px;
   }
@@ -30,6 +31,7 @@
     padding: 30px;
     border-radius: 30px;
     width: 80px;
+    /* Removed margin-bottom to keep everything in the same row */
   }
   
   .dashboard-title h1 {

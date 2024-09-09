@@ -1,14 +1,19 @@
-import React from "react";
-import TaskCard from "./TaskCard";
+// TaskBoard.js
+import React from 'react';
+import TaskCard from './TaskCard';
 
 const TaskBoard = ({ tasks, updateTaskStatus }) => {
+  
   const handleDragOver = (e) => {
     e.preventDefault(); // Allow the drop by preventing the default behavior
   };
 
   const handleDrop = (e, newStatus) => {
+    e.preventDefault(); // Prevent default handling of the drop event
     const taskId = e.dataTransfer.getData("taskId"); // Retrieve the task ID from the dragged item
-    updateTaskStatus(Number(taskId), newStatus); // Update task status when dropped
+    if (taskId) {
+      updateTaskStatus(taskId, newStatus); // Update task status when dropped
+    }
   };
 
   return (

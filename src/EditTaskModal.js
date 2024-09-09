@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import TaskModal from "./TaskModal";
 
 const EditTaskModal = ({ tasks, onClose, onSave }) => {
-  const [selectedTask, setSelectedTask] = useState(null); // Store selected task for editing
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const handleEditClick = (task) => {
-    setSelectedTask(task); // Set the task to be edited
+    setSelectedTask(task);
   };
 
   return (
     <div className="edit-task-modal">
       {selectedTask ? (
-        <TaskModal 
-          task={selectedTask} 
-          onClose={onClose} 
-          onSave={onSave} 
+        <TaskModal
+          task={selectedTask}
+          onClose={onClose}
+          onSave={onSave}
         />
       ) : (
         <div>

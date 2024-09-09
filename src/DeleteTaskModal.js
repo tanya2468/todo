@@ -1,8 +1,8 @@
 import React from "react";
 
 const DeleteTaskModal = ({ tasks, onClose, onDelete }) => {
-  const handleDeleteClick = (taskId) => {
-    onDelete(taskId); // Pass the selected task's ID to the parent component
+  const handleDeleteClick = async (taskId) => {
+    await onDelete(taskId); // Pass the selected task's ID to the parent component
     onClose(); // Close the modal after deletion
   };
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "./TaskModal.css"; // Import modal-specific CSS
+import { db } from "./firebase";
+import { addDoc, collection, updateDoc, doc } from "@firebase/firestore";
+import "./TaskModal.css";
 
 const TaskModal = ({ task, onClose, onCreate, onSave }) => {
   const [title, setTitle] = useState("");
@@ -7,53 +9,76 @@ const TaskModal = ({ task, onClose, onCreate, onSave }) => {
   const [date, setDate] = useState("");
   const [status, setStatus] = useState("");
   const [priority, setPriority] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  // Helper function to convert date to dd/mm/yyyy
+  const tasksCollection = collection(db, "tasks");
+
   const formatDate = (inputDate) => {
     const dateParts = inputDate.split("-");
-    return `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // dd/mm/yyyy
+    return `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`;
   };
 
-  // Populate form fields if editing an existing task
   useEffect(() => {
     if (task) {
       setTitle(task.title);
       setDescription(task.description);
-      setDate(task.date.split("/").reverse().join("-")); // Convert dd/mm/yyyy to yyyy-mm-dd
+      setDate(task.date.split("/").reverse().join("-"));
       setStatus(task.status);
       setPriority(task.priority);
     }
   }, [task]);
 
-  const handleSave = () => {
-    if (title && date && status && priority) {
+  const isFormValid = () => {
+    return title && date && status && priority;
+  };
+
+  const handleCreate = async () => {
+    if (!isFormValid()) {
+      alert("Please fill out all required fields!");
+      return;
+    }
+
+    setIsLoading(true);
+
+    const newTask = {
+      title,
+      description,
+      date: formatDate(date),
+      status,
+      priority,
+    };
+
+    try {
+      const docRef = await addDoc(tasksCollection, newTask);
+      onCreate({ ...newTask, id: docRef.id });
+      onClose();
+    } catch (error) {
+      console.error("Error creating task:", error);
+      alert("An error occurred while creating the task. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSave = async () => {
+    if (isFormValid()) {
       const updatedTask = {
         ...task,
         title,
         description,
-        date: formatDate(date), // Convert date to dd/mm/yyyy format
+        date: formatDate(date),
         status,
-        priority
+        priority,
       };
-      onSave(updatedTask);
-      onClose(); // Close the modal after saving the task
-    } else {
-      alert("Please fill out all required fields!");
-    }
-  };
 
-  const handleCreate = () => {
-    if (title && date && status && priority) {
-      const newTask = {
-        id: Date.now(), // Generate a unique ID
-        title,
-        description,
-        date: formatDate(date), // Convert date to dd/mm/yyyy format
-        status,
-        priority
-      };
-      onCreate(newTask);
-      onClose(); // Close the modal after creating the task
+      try {
+        await updateDoc(doc(db, "tasks", task.id), updatedTask);
+        onSave(updatedTask);
+        onClose();
+      } catch (error) {
+        console.error("Error saving task:", error);
+        alert("An error occurred while saving the task. Please try again.");
+      }
     } else {
       alert("Please fill out all required fields!");
     }
@@ -77,7 +102,6 @@ const TaskModal = ({ task, onClose, onCreate, onSave }) => {
               required
             />
           </div>
-
           <div className="input-group">
             <label htmlFor="description">Description</label>
             <textarea
@@ -86,7 +110,6 @@ const TaskModal = ({ task, onClose, onCreate, onSave }) => {
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>
-
           <div className="input-group">
             <label htmlFor="date">Select Date *</label>
             <input
@@ -97,7 +120,6 @@ const TaskModal = ({ task, onClose, onCreate, onSave }) => {
               required
             />
           </div>
-
           <div className="input-group">
             <label htmlFor="status">Status *</label>
             <select
@@ -112,7 +134,6 @@ const TaskModal = ({ task, onClose, onCreate, onSave }) => {
               <option value="completed">Completed</option>
             </select>
           </div>
-
           <div className="input-group">
             <label htmlFor="priority">Priority *</label>
             <select
@@ -128,14 +149,16 @@ const TaskModal = ({ task, onClose, onCreate, onSave }) => {
             </select>
           </div>
         </div>
-
         <footer>
-          <button className="cancel-button" onClick={onClose}>Cancel</button>
-          <button 
-            className="save-button" 
+          <button className="cancel-button" onClick={onClose} disabled={isLoading}>
+            Cancel
+          </button>
+          <button
+            className="save-button"
             onClick={task ? handleSave : handleCreate}
+            disabled={isLoading}
           >
-            {task ? "Save" : "Create"}
+            {isLoading ? "Processing..." : task ? "Save" : "Create"}
           </button>
         </footer>
       </div>
